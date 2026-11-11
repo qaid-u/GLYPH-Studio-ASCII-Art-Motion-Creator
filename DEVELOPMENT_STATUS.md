@@ -1,5 +1,11 @@
 # GLYPH Studio — Development Status
 
+## Telegram alert workflow — 2026-11-11
+
+- Added an optional hourly GitHub Actions firewall monitor, a manually triggered connection test, private Windows credential setup, and automated tests. The schedule is disabled by default until repository variable `GLYPH_ALERT_MONITOR_ENABLED` is set to `true`.
+- Verification: PowerShell syntax, 4 monitor tests, 26 unit tests, lint, and production build passed. Telegram and Vercel credentials have not been configured, so delivery and live scheduled monitoring are not yet verified. Next: create/start the bot, run the private setup script, run the manual notification test, then enable the schedule only after success. The existing Codex hourly check is separate.
+- Vercel firewall alerts cover detected events, not every suspicious request; scheduled runs can be delayed, and alerts in the two-hour lookback can repeat.
+
 ## Firewall alert monitoring — 2026-11-11
 
 - Created an hourly Codex chat check for newly detected Vercel firewall alerts; this depends on the local environment and Vercel access and does not send email. Vercel reported no active or resolved firewall alerts in the latest 24-hour check.

@@ -1,0 +1,38 @@
+name: Firewall alert monitor
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+    inputs:
+      test_notification:
+        description: Send a test notification after checking Vercel
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firewall-alert-monitor
+  cancel-in-progress: false
+
+jobs:
+  check-firewall:
+    if: github.event_name == 'workflow_dispatch' || vars.GLYPH_ALERT_MONITOR_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Install Vercel CLI
+        run: npm install --global vercel@63.1.2
+      - name: Query alerts and notify Telegram
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_ALERT_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SEND_TEST: ${{ github.event_name == 'workflow_dispatch' && inputs.test_notification || false }}
+        run: node scripts/firewall-monitor.mjs
