@@ -15,7 +15,7 @@ GLYPH Studio is a local-first creative application under active development. Cho
 - **ASCII studio:** Convert PNG, JPEG, and WebP images into character art. Adjust the character style, colors, framing, and image settings.
 - **Motion:** Preview wave, glitch, matrix rain, dissolve, pulse, and ripple animations with playback and timeline controls.
 - **Image effects:** Explore One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking. Each converter has presets, optional detailed controls, and PNG export. Animated converters can also export WebM in supported browsers.
-- **Background removal:** The ASCII studio supports on-device subject detection, simple edge-color removal, and mask refinement. Expanding background removal to the other converters is in development and has not yet completed browser verification.
+- **Background removal:** All converters support on-device subject detection, simple edge-color removal, and mask refinement. PNG exports retain transparency; the receipt converter keeps its paper background, and WebM uses a dark backdrop.
 - **Exports:** The ASCII studio supports PNG, TXT, animated GIF, and WebM. GIF output is limited to 640 pixels on its longest edge; WebM support varies by browser.
 - **Mobile and offline:** Use the mobile editor shortcuts and install the PWA where supported. After the app shell is cached, core features can work offline. Run subject detection once online to cache its model and runtime for subsequent offline use.
 

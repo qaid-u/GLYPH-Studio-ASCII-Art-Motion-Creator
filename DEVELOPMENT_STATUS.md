@@ -1,5 +1,16 @@
 # GLYPH Studio — Development Status
 
+## Repository documentation — 2026-11-11
+
+- Refreshed the README with the current Vercel link, screenshot, converter and export details, setup, privacy, security, and known limitations. The README now documents background removal across all converters and its export limitations.
+- Published the README and screenshot; follow-up documentation accompanies the verified background-removal changes.
+
+## Converter background removal — 2026-11-11
+
+- Added subject detection, simple edge-color removal, threshold controls, and subject-mask refinement to all seven additional converters. The same mask is used for preview and PNG. Receipt output retains its paper; WebM uses a dark backdrop. Transparent pixels are ignored by blob detection.
+- Verification: lint, TypeScript/production build, 27 unit tests, 45 browser tests, and 4 offline/security tests passed. The browser suite covers all seven preview/PNG paths, subject inference and mask refinement in Pink Phosphor, and a WebM export; offline subject inference was checked in One Bit Dither after caching. The offline preview-server timeout was increased for slower machines after an initial startup timeout.
+- Limitations: subject detection is probabilistic; broader mobile and browser coverage remains needed. The model must be downloaded on first use.
+
 ## Telegram alert workflow — 2026-11-11
 
 - Added an optional hourly GitHub Actions firewall monitor, a manually triggered connection test, private Windows credential setup, and automated tests. The schedule is disabled by default until repository variable `GLYPH_ALERT_MONITOR_ENABLED` is set to `true`.
