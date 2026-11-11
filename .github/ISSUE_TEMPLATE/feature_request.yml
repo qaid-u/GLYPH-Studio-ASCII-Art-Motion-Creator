@@ -1,0 +1,19 @@
+name: Feature request
+description: Suggest an improvement to GLYPH Studio.
+title: "[Feature] "
+labels: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the problem or workflow.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help?
+      description: Describe your proposed improvement and any alternatives.
+    validations:
+      required: true

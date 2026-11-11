@@ -1,17 +1,69 @@
 # GLYPH Studio
 
-A local-first image-to-ASCII editor. Images are processed in your browser.
+**Turn images into animated ASCII art, entirely in your browser.**
 
-## Development
+GLYPH Studio is a local-first creative editor for converting an image into character art, refining its appearance, adding motion, and exporting the result. It is a working prototype under active development.
 
-Requires Node.js. Run `npm install`, then `npm run dev` and open the local URL. Run `npm test` for unit tests and `npm run build` for a production build.
+![GLYPH Studio editor showing the generated demo artwork](docs/studio-preview.png)
 
-See [development.md](development.md) for the blueprint and [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for verified progress and known limitations.
+## What you can do
 
-## Current capabilities
+- **Create:** Upload a PNG, JPEG, or WebP image, paste one from the clipboard, or try the built-in demo. Adjust framing, character density, color, contrast, and other image settings.
+- **Isolate and refine:** Remove a background with an on-device subject-detection model or a simple edge-color method. Use the keep and erase brushes to refine a detected subject.
+- **Animate:** Preview wave, glitch, matrix rain, dissolve, pulse, and ripple effects with playback, loop, and timeline controls.
+- **Export:** Download PNG, TXT, animated GIF, or WebM. PNG supports transparency; GIF is limited to 640 px on its longest edge, and WebM availability depends on browser support.
+- **Return to your work:** Save, reopen, rename, duplicate, and delete projects stored in the browser on your device.
+- **Work offline:** Install the app where supported. After the initial files and model are cached, the application shell can load without a network connection.
 
-The editor supports a generated demo or local image upload, ASCII styling, six procedural effects, timeline controls, PNG/TXT, and GIF/WebM export. Media exports and browser compatibility still need end-to-end verification; see the status file. GIF encoding runs locally and WebM availability depends on the browser.
+Images are processed on the device and are not uploaded by the app. Projects live in browser storage; clearing that storage can delete them.
 
-Run `npm run test:browser` to execute the local browser checks with installed Microsoft Edge. Set `GLYPH_BROWSER_CHANNEL` to another installed Playwright browser channel when appropriate.
+## Quick start
 
-Projects are saved in browser storage and may be removed when browser data is cleared. The app can be installed where supported and caches its core files and local model after the first successful load. Run `npm run test:offline` after `npm run build` to verify the offline shell.
+**Requirements:** Node.js 24 and npm. Browser tests use an installed Microsoft Edge by default.
+
+```bash
+git clone https://github.com/qaid-u/GLYPH-Studio-ASCII-Art-Motion-Creator.git
+cd GLYPH-Studio-ASCII-Art-Motion-Creator
+npm ci
+npm run dev
+```
+
+Open the local URL printed by Vite. Use **Try demo** or choose an image to begin. The [private deployed app](https://glyph-studio-ascii.docilelinen.chatgpt.site) is available to its authorized owner.
+
+## Development commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run typecheck` | Check TypeScript types |
+| `npm test` | Run engine unit tests |
+| `npm run build` | Type-check and create the production build in `dist/` |
+| `npm run preview` | Serve the production build locally |
+| `npm run test:browser` | Run the editor and export tests in Edge |
+| `npm run test:offline` | Test the built app's offline shell and cached model; run `npm run build` first |
+
+Set `GLYPH_BROWSER_CHANNEL` to another installed Playwright browser channel when appropriate. The browser tests start local servers and require permission to launch the browser and connect to those servers.
+
+## How it works
+
+```text
+Image → sample pixels → map luminance to characters → animate a frame → preview / export
+  └── optional local subject mask ────────────────────────┘
+```
+
+The editor uses React, TypeScript, Vite, and Canvas 2D. Subject detection runs in a Web Worker with ONNX Runtime Web and bundled U²-Net weights. IndexedDB stores projects locally; a service worker caches the app shell and model for offline use.
+
+## Status and limitations
+
+GLYPH Studio is **not yet a production-ready release**. Background removal is probabilistic, and mask brushes currently require pointer or touch input. GIF and WebM exports have browser and performance constraints. Installation, offline inference, accessibility, and export behavior need broader testing across devices and browsers. The offline test verifies the cached shell and model fetch, not the complete installed-app lifecycle.
+
+See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for verified checks and current priorities, and [development.md](development.md) for the longer product blueprint.
+
+## Project information
+
+- [Development guide](CONTRIBUTING.md) — setup, tests, and expectations for authorized collaborators
+- [Security policy](SECURITY.md) — reporting a suspected security issue
+- [Third-party notices](THIRD_PARTY_NOTICES.md) — dependency and model attribution
+- [License draft](license.md) — proprietary rights notice awaiting owner review
+
+GLYPH Studio is a working name; no trademark registration or clearance is claimed.
