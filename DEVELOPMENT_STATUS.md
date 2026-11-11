@@ -1,5 +1,10 @@
 # GLYPH Studio — Development Status
 
+## Editing controls emphasis — 2026-11-11
+
+- Made the Detailed editing controls heading larger, bolder, and more prominent while retaining its native collapsible and keyboard behavior.
+- Verification: lint, build, a keyboard interaction browser test, and mobile visual inspection passed.
+
 ## Control visibility — 2026-11-11
 
 - Removed collapsible wrappers around the two image-transform controls, the two ASCII framing controls, and the single custom-character input. Larger editing groups remain collapsible.
