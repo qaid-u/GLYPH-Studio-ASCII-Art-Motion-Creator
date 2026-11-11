@@ -1,5 +1,10 @@
 # GLYPH Studio — Development Status
 
+## Interactive homepage artwork — 2026-11-11
+
+- Added a newly generated cyber-city illustration and an interactive Original/ASCII preview using the existing conversion engine, plus pointer-responsive lighting and a reduced-motion-aware scan effect. The optimized image is included in the PWA cache. The supplied reference image is not included in the application.
+- Verification: lint, production build, 26 unit tests, 2 homepage interaction/mobile tests, and 3 offline/security tests passed. Copyright clearance cannot be guaranteed.
+
 ## Cyber Japanese UI — 2026-11-11
 
 - Redesigned the homepage and editor surfaces with a monochrome cyber interface, Japanese typographic details, original geometric artwork, responsive converter cards, and preserved creator attribution. Existing image and export functionality remains in place.

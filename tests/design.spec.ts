@@ -16,3 +16,18 @@ test('cyber interface stays usable on desktop and mobile',async({page})=>{
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
   }
 });
+test('homepage switches between the original and real ASCII preview',async({page})=>{
+  await page.goto('http://127.0.0.1:5173/');
+  const controls=page.getByRole('group',{name:'Preview style'});
+  const original=page.getByRole('img',{name:/original cyber-inspired illustration/i});
+  const ascii=page.getByLabel('ASCII rendering of the illustrated artist');
+  await expect(original).toBeVisible();
+  await expect(controls.getByRole('button',{name:'ASCII'})).toBeEnabled();
+  await controls.getByRole('button',{name:'ASCII'}).click();
+  await expect(ascii).toBeVisible();
+  await expect(original).toBeHidden();
+  const colors=await ascii.evaluate((canvas:HTMLCanvasElement)=>new Set(Array.from(canvas.getContext('2d')!.getImageData(0,0,canvas.width,canvas.height).data).filter((_,i)=>i%4!==3)).size);
+  expect(colors).toBeGreaterThan(10);
+  await controls.getByRole('button',{name:'Original'}).click();
+  await expect(original).toBeVisible();
+});
