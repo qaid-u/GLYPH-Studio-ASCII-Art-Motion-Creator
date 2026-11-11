@@ -13,7 +13,7 @@ export function animate(source:Grid,time:number,m:Motion):Grid {
   const base=(sx>=0&&sx<cols&&sy>=0&&sy<rows)?source.cells[sy*cols+sx]:empty;
   if(m.effect==='glitch'&&base.char!==' '&&random(i+tick*999,m.seed+2)>.99-intensity*.05)return {...base,char:'@#%+*'[Math.floor(random(i+tick,m.seed+3)*5)]};
   if(m.effect==='dissolve'&&random(i,m.seed)>(1-intensity*(.5-.5*Math.cos(phase))))return empty;
-  if(m.effect==='matrix'){const head=((time*m.speed*8+random(x,m.seed)*rows*2)% (rows+12))-6, distance=(head-y+rows+12)%(rows+12);if(distance<5&&random(i+tick,m.seed+4)<intensity)return {char:'01|:.'[Math.floor(random(i+tick,m.seed+5)*5)],color:'#80f5b5'};return base}
+  if(m.effect==='matrix'){if(base.removed)return base;const head=((time*m.speed*8+random(x,m.seed)*rows*2)% (rows+12))-6, distance=(head-y+rows+12)%(rows+12);if(distance<5&&random(i+tick,m.seed+4)<intensity)return {char:'01|:.'[Math.floor(random(i+tick,m.seed+5)*5)],color:'#80f5b5'};return base}
   if(m.effect==='pulse'&&base.char!==' '){return {...base,alpha:1-intensity*.65*(.5-.5*Math.cos(phase))}}
   return base;
  });return {cols,rows,cells};

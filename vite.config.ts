@@ -1,0 +1,3 @@
+import {defineConfig} from 'vite';
+import {VitePWA} from 'vite-plugin-pwa';
+export default defineConfig({plugins:[VitePWA({registerType:'prompt',includeAssets:['icons/*.png'],manifest:{name:'GLYPH Studio',short_name:'GLYPH',description:'Create and animate ASCII artwork locally.',theme_color:'#09110f',background_color:'#09110f',display:'standalone',icons:[{src:'icons/icon-192.png',sizes:'192x192',type:'image/png'},{src:'icons/icon-512.png',sizes:'512x512',type:'image/png',purpose:'any maskable'}]},workbox:{globPatterns:['**/*.{js,css,html,svg,png,onnx,wasm,mjs}'],maximumFileSizeToCacheInBytes:20*1024*1024}})]});

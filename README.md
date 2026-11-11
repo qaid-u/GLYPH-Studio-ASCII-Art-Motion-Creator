@@ -13,3 +13,5 @@ See [development.md](development.md) for the blueprint and [DEVELOPMENT_STATUS.m
 The editor supports a generated demo or local image upload, ASCII styling, six procedural effects, timeline controls, PNG/TXT, and GIF/WebM export. Media exports and browser compatibility still need end-to-end verification; see the status file. GIF encoding runs locally and WebM availability depends on the browser.
 
 Run `npm run test:browser` to execute the local browser checks with installed Microsoft Edge. Set `GLYPH_BROWSER_CHANNEL` to another installed Playwright browser channel when appropriate.
+
+Projects are saved in browser storage and may be removed when browser data is cleared. The app can be installed where supported and caches its core files and local model after the first successful load. Run `npm run test:offline` after `npm run build` to verify the offline shell.

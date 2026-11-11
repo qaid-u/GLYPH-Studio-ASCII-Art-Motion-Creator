@@ -1,32 +1,30 @@
 # GLYPH Studio — Development Status
 
 Updated: 2026-11-11  
-Current milestone: 1 / 2 — P0 completion and animation/export validation  
-Repository state: In progress; not release-ready
+Repository state: Working prototype; further device testing needed.
 
 ## Implemented
-- Local PNG/JPEG/WebP input (picker, drop, paste), demo, validation and original Canvas ASCII rendering. Controls include character ramps, density, brightness, contrast, gamma, inversion and colors. Grid dimensions now preserve portrait proportions when row limits apply.
-- Six deterministic motion effects, still mode, playback, loop, scrub, duration, speed, intensity and reduced-motion startup.
-- PNG/TXT exports and lazy-loaded GIF / feature-detected real-time WebM exports, with progress and cancellation.
-- Explicit accessible labels for sliders. Vitest updated to address dependency audit findings.
+- Local image input, editable ASCII settings, quick looks, edge emphasis, source preview, aspect-ratio and contain/cover controls.
+- On-device U²-Net subject removal with threshold and keep/erase mask brushes; simple edge-color removal remains available. Transparent live preview and optional transparent PNG.
+- Six animation effects, playback controls, PNG/TXT/GIF/WebM exports, configurable filename, PNG scale, video maximum size and frame rate.
+- IndexedDB project save, autosave, rename through project name, reopen, duplicate and confirmed delete. Source image, settings, mask and export preferences are stored locally. Browser data deletion can remove projects.
+- Installable PWA manifest and icons, service-worker offline shell and cached model/runtime; update prompt requests saving before refresh. Install option appears when supported, with browser-menu guidance otherwise.
 
 ## Verification
-- `npm run build`: Pass, including TypeScript.
-- `npm test`: Pass, 12 unit tests.
-- `npm run test:browser`: Pass, 2 Playwright tests with desktop Edge and a 390px mobile viewport. Tests exercise demo, upload, invalid input, mobile horizontal overflow, PNG signature, TXT content, multiple differing GIF frames, and decoding/seeking to differing WebM frames.
-- `npm install` audit after Vitest update: 0 vulnerabilities.
-- Browser tests use installed Microsoft Edge by default; set `GLYPH_BROWSER_CHANNEL` for another installed Playwright channel. They require local server/browser access.
+- `npm run build`: pass (TypeScript and production build).
+- `npm test`: pass, 16 unit tests.
+- `npm run test:browser`: pass, 5 Edge tests covering export files, real-photo segmentation, mask editing/restoration, project operations and mobile overflow.
+- `npm run test:offline`: pass, Edge production shell and cached model loaded without network after initial caching.
+- `npm audit --omit=dev`: 0 vulnerabilities. Full audit reported 6 development-tool advisories after installing PWA tooling (2 low, 4 moderate); investigate upstream fixes.
 
-## Remaining issues
-- Mobile layout was checked for horizontal overflow only; drag/drop, paste, all effects, timeline controls, cancellation, PNG image decoding and browser compatibility need broader interaction/device testing.
-- Image dimensions are checked after decoding. Fit/crop, source preview, separate Home/Studio navigation, and other requested P0 controls remain incomplete.
-- GIF export may be slow; WebM runs in real time and background tabs can throttle recording. GIF/WebM supported browsers still need wider testing.
-- No IndexedDB projects, PWA/install/offline, MP4, lint or accessibility audit yet.
+## Remaining work
+- Test install, update, offline inference and exports across mobile and non-Edge browsers; offline test checks cached model fetch, not full inference or installed-app lifecycle.
+- Background detection is probabilistic; mask brushes currently support pointer/touch input and need a keyboard-accessible alternative. Source comparison is a small original preview, not a synchronized side-by-side editor.
+- Advanced controls are not yet collapsed into a separate beginner mode; separate final-output preview and additional output dimensions may improve export UX. GIF caps its longest edge at 640 px; WebM records in real time.
+- Add project backup/import and richer quota/recovery handling. Explicit created-at metadata and schema migrations are not yet implemented.
+- Assess dev-dependency audit advisories, mobile accessibility, crop/mask alignment across aspect ratios, and expanded performance testing before public release.
 
-## Next 3 tasks
-1. Complete P0 input and image controls (source preview, dimensions, fit/crop and safer decode handling) and add targeted browser tests.
-2. Test and harden playback, drag/paste, cancellation and exports across supported browsers and mobile; add lint/accessibility checks.
-3. Implement IndexedDB project save/reopen/rename/duplicate/delete and PWA offline/install workflow.
-
-## Notes
-- Local-only image processing; no server upload or telemetry. Do not copy NIGHT TIDE. `license.md` is an owner-review draft; direct production dependencies are listed in `THIRD_PARTY_NOTICES.md`.
+## Next tasks
+1. Resolve development dependency advisories and broaden device/accessibility testing.
+2. Add keyboard-friendly mask correction, stronger before/after comparison, and clearer beginner/advanced modes.
+3. Add local project backup/import and test offline model inference and installation on mobile.

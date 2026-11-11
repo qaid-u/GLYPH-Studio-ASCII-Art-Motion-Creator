@@ -1,0 +1,5 @@
+import {describe,expect,it} from 'vitest';
+import {backgroundMask} from './background';
+import {animate} from './animation';
+const rgb=(values:number[])=>new Uint8ClampedArray(values.flatMap(v=>[v,v,v,255]));
+describe('background removal',()=>{it('removes matching edge-connected pixels without removing an enclosed matching region',()=>{const data=rgb([255,255,255,255,255,255,0,0,0,255,255,0,255,0,255,255,0,0,0,255,255,255,255,255,255]);const before=data.slice();expect([...backgroundMask(data,5,5,5)]).toEqual([1,1,1,1,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,1,1,1,1]);expect(data).toEqual(before)});it('applies tolerance to similar edge colors',()=>{const data=rgb([200,210,230]);expect([...backgroundMask(data,3,1,5)]).toEqual([1,1,0]);expect([...backgroundMask(data,3,1,15)]).toEqual([1,1,1])});it('keeps masked cells blank in matrix rain',()=>{const grid={cols:1,rows:1,cells:[{char:' ',color:'#000',removed:true}]};for(let t=0;t<10;t+=.1)expect(animate(grid,t,{effect:'matrix',duration:5,speed:1,intensity:1,seed:42}).cells[0].char).toBe(' ')})});
