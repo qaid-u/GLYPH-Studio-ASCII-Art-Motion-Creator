@@ -72,3 +72,14 @@ test('homepage accepts dropped images and rejects invalid files',async({page})=>
   await page.getByRole('button',{name:'Reset',exact:true}).click();
   await expect(page.getByText(/Drop a PNG, JPEG, or WebP here/)).toBeVisible();
 });
+test('cockpit theme supports keyboard focus and reduced motion',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('http://127.0.0.1:5173/');
+  await expect(page.locator('body')).toHaveCSS('background-color','rgb(15, 15, 26)');
+  const card=page.locator('.feature-card').first();
+  await card.focus();
+  await expect(card).toBeFocused();
+  await expect(card).toHaveCSS('transition-duration','0s');
+  await expect(card).toHaveCSS('box-shadow',/rgb\(56, 189, 248\)/);
+  await expect(page.locator('.hero-scan')).toBeHidden();
+});
