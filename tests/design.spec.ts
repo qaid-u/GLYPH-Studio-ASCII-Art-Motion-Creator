@@ -19,8 +19,8 @@ test('cyber interface stays usable on desktop and mobile',async({page})=>{
 test('homepage switches between the original and real ASCII preview',async({page})=>{
   await page.goto('http://127.0.0.1:5173/');
   const controls=page.getByRole('group',{name:'Preview style'});
-  const original=page.getByRole('img',{name:/original cyber-inspired illustration/i});
-  const ascii=page.getByLabel('ASCII rendering of the illustrated artist');
+  const original=page.getByRole('img',{name:/illustration of a blue-haired character/i});
+  const ascii=page.getByLabel('ASCII rendering of the illustrated portrait');
   await expect(original).toBeVisible();
   await expect(controls.getByRole('button',{name:'ASCII'})).toBeEnabled();
   await controls.getByRole('button',{name:'ASCII'}).click();
@@ -28,6 +28,11 @@ test('homepage switches between the original and real ASCII preview',async({page
   await expect(original).toBeHidden();
   const colors=await ascii.evaluate((canvas:HTMLCanvasElement)=>new Set(Array.from(canvas.getContext('2d')!.getImageData(0,0,canvas.width,canvas.height).data).filter((_,i)=>i%4!==3)).size);
   expect(colors).toBeGreaterThan(10);
+  await controls.getByRole('button',{name:'Compare'}).click();
+  await expect(original).toBeVisible();
+  await expect(ascii).toBeVisible();
+  await page.getByLabel('ASCII reveal amount').fill('75');
+  await expect(ascii).toHaveCSS('clip-path','inset(0px 25% 0px 0px)');
   await controls.getByRole('button',{name:'Original'}).click();
   await expect(original).toBeVisible();
 });

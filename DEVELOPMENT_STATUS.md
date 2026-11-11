@@ -1,5 +1,10 @@
 # GLYPH Studio — Development Status
 
+## Supplied homepage image — 2026-11-11
+
+- Replaced the earlier generated hero artwork with the user-supplied portrait, optimized for the PWA cache. Added a draggable Original/ASCII comparison alongside the existing live conversion and motion effects.
+- Verification: lint, production build, 26 unit tests, 2 homepage interaction/mobile tests, and 3 offline/security tests passed.
+
 ## Interactive homepage artwork — 2026-11-11
 
 - Added a newly generated cyber-city illustration and an interactive Original/ASCII preview using the existing conversion engine, plus pointer-responsive lighting and a reduced-motion-aware scan effect. The optimized image is included in the PWA cache. The supplied reference image is not included in the application.
