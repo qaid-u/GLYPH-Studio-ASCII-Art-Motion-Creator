@@ -19,7 +19,7 @@ GLYPH Studio is a local-first creative application under active development. Cho
 - **Exports:** The ASCII studio supports PNG, TXT, animated GIF, and WebM. GIF output is limited to 640 pixels on its longest edge; WebM support varies by browser.
 - **Mobile and offline:** Use the mobile editor shortcuts and install the PWA where supported. After the app shell is cached, core features can work offline. Run subject detection once online to cache its model and runtime for subsequent offline use.
 
-The detailed controls include stochastic dithering, phosphor ghosting and scanlines, CRT screen roll, flashlight beam shape, receipt paper and print settings, datamosh block opacity, and blob overlay options. Open **Detailed editing controls** and **Advanced settings** in a converter to explore them.
+The detailed controls include stochastic dithering, phosphor ghosting and scanlines, CRT screen roll, flashlight beam shape, receipt paper and print settings, datamosh block opacity, and blob overlay options. Find these controls directly in the converter’s adjustment panel; **Reset edits** restores its defaults without removing the image.
 
 Datamosh is a simulated visual effect. Blob Tracking detects regions in a still image rather than tracking real-world motion. See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for tested behavior and current work.
 

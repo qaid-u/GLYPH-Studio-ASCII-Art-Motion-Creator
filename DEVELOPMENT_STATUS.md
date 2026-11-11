@@ -1,5 +1,10 @@
 # GLYPH Studio — Development Status
 
+## Visible converter controls and reset — 2026-11-11
+
+- Removed the Detailed editing controls and Advanced settings disclosures in all seven converters. Their controls are visible directly. Added a prominent Reset edits action that restores converter defaults, transforms, background-removal and playback settings while keeping the loaded image.
+- Verification: lint, build, 28 unit tests, and 5 offline/security tests passed. The browser suite passed 54 of 55 tests; one mobile scroll-position assertion was overly strict and passed on a targeted retry after correction. The reset behavior is covered by a browser test.
+
 ## Editing controls emphasis — 2026-11-11
 
 - Made the Detailed editing controls heading larger, bolder, and more prominent while retaining its native collapsible and keyboard behavior.
