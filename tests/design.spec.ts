@@ -46,3 +46,29 @@ test('every feature preview is rendered from the homepage image',async({page})=>
   await page.reload();
   await expect.poll(async()=>cards.evaluateAll((cs,prior)=>cs.filter((c,i)=>(c as HTMLCanvasElement).width!==300&&(c as HTMLCanvasElement).toDataURL()!==prior[i]).length,original)).toBe(8);
 });
+test('homepage image selection updates previews and opens in either editor',async({page})=>{
+  await page.goto('http://127.0.0.1:5173/');
+  const cards=page.locator('.feature-card canvas');
+  await expect.poll(()=>cards.evaluateAll(cs=>cs.every(c=>(c as HTMLCanvasElement).width!==300))).toBe(true);
+  const before=await cards.evaluateAll(cs=>cs.map(c=>(c as HTMLCanvasElement).toDataURL()));
+  await page.getByLabel('Choose an image for feature previews').setInputFiles('tests/fixtures/astronaut.png');
+  await expect(page.getByText(/Using astronaut.png/)).toBeVisible();
+  await expect.poll(()=>cards.evaluateAll((cs,prior)=>cs.filter((c,i)=>(c as HTMLCanvasElement).toDataURL()!==prior[i]).length,before)).toBe(8);
+  await page.getByRole('link',{name:/Image to ASCII/}).click();
+  await expect(page.getByLabel('ASCII art preview')).toBeVisible();
+  await page.getByRole('link',{name:'Back to all converters'}).click();
+  await page.getByRole('link',{name:/Image to One Bit Dither/}).click();
+  await expect(page.getByLabel('Converted image preview')).toBeVisible();
+  await expect(page.locator('.converter-page').getByText(/astronaut.png/)).toBeVisible();
+});
+test('homepage accepts dropped images and rejects invalid files',async({page})=>{
+  await page.goto('http://127.0.0.1:5173/');
+  await page.getByLabel('Choose an image for feature previews').setInputFiles({name:'invalid.txt',mimeType:'text/plain',buffer:Buffer.from('invalid')});
+  await expect(page.getByRole('alert')).toContainText('Choose a PNG, JPEG, or WebP');
+  const base64=(await import('node:fs')).readFileSync('tests/fixtures/astronaut.png').toString('base64');
+  await page.locator('.feature-upload').evaluate((node,data)=>{const bytes=Uint8Array.from(atob(data),c=>c.charCodeAt(0));const transfer=new DataTransfer();transfer.items.add(new File([bytes], 'dropped.png',{type:'image/png'}));node.dispatchEvent(new DragEvent('drop',{bubbles:true,dataTransfer:transfer}));},base64);
+  await expect(page.getByText(/Using dropped.png/)).toBeVisible();
+  await expect(page.getByRole('alert')).toHaveCount(0);
+  await page.getByRole('button',{name:'Reset',exact:true}).click();
+  await expect(page.getByText(/Drop a PNG, JPEG, or WebP here/)).toBeVisible();
+});

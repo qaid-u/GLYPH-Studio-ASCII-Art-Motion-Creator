@@ -1,5 +1,10 @@
 # GLYPH Studio — Development Status
 
+## Homepage image upload — 2026-11-11
+
+- Added drag-and-drop and file selection for feature previews, local image validation, reset, and transfer of the selected image into the chosen editor. Images remain in browser memory.
+- Verification: lint, production build, 26 unit tests, 34 browser tests, and 4 offline/security tests passed. Fixed a CSP test teardown race observed on the first offline run.
+
 ## Feature card previews — 2026-11-11
 
 - All eight homepage feature cards now render the supplied portrait through their respective effects, sharing one cropped image for efficient loading. A generated fallback remains available if the image cannot load.
