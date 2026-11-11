@@ -78,4 +78,7 @@ The deployed app uses security headers and Vercel firewall protections. Browser-
 - [Product blueprint](development.md) — longer-term development notes
 - [Proprietary rights notice](license.md) — draft for owner review
 
+## Link Website
+https://glyph-studio-vercel.vercel.app/
+
 Copyright © 2026 Muhammad Qaid Uqail. All rights reserved. Third-party components remain subject to their respective licenses.
