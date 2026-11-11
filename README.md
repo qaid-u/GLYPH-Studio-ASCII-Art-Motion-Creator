@@ -12,7 +12,7 @@ GLYPH Studio is a local-first creative editor for converting an image into chara
 - **Isolate and refine:** Remove a background with an on-device subject-detection model or a simple edge-color method. Use the keep and erase brushes to refine a detected subject.
 - **Animate:** Preview wave, glitch, matrix rain, dissolve, pulse, and ripple effects with playback, loop, and timeline controls.
 - **Export:** Download PNG, TXT, animated GIF, or WebM. PNG supports transparency; GIF is limited to 640 px on its longest edge, and WebM availability depends on browser support.
-- **Work offline:** Install the app where supported. After the initial files and model are cached, the application shell can load without a network connection.
+- **Work offline:** Install the app where supported. After the application shell is cached, it can load without a network connection. Use subject removal once online to cache its model and runtime for later offline use.
 
 Images are processed on the device and are not uploaded by the app. Project-saving controls have been removed; existing browser project data is not deleted.
 
@@ -72,3 +72,5 @@ GLYPH Studio is a working name; no trademark registration or clearance is claime
 The **New Features** section also provides first versions of seven direct image converters: One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking. Each has a separate workspace, presets, collapsible detailed controls, and PNG export. Animated tools can export WebM where supported. Datamosh is simulated, and Blob Tracking visualizes regions in a still image rather than tracking real motion. See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for the remaining advanced controls and export limitations.
 
 Converter controls include configurable dithering patterns, datamosh direction and frequency, bright/dark/color blob detection, flashlight motion paths, receipt texture, CRT interference, and phosphor glow. The controls are in each tool’s detailed settings.
+
+For deployment security, traffic settings, caching, and operational limitations, see [Security and performance](docs/security-and-performance.md).

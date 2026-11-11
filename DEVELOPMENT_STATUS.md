@@ -1,5 +1,13 @@
 # GLYPH Studio — Development Status
 
+## Security and performance — 2026-11-11
+
+- Added Vercel security headers, including a same-origin Content Security Policy, frame restrictions, MIME sniffing protection, and a restrictive permissions policy. Hashed assets have immutable cache headers; the fixed-name model has a shorter cache lifetime. The public client and its model remain downloadable by design.
+- The Vercel managed AI-bot rule denies identified AI bots; general Bot Protection is in log mode. These measures deter some automated traffic but do not prevent scraping or reverse engineering. Vercel logs provide aggregate traffic visibility without adding an analytics script.
+- The PWA precache decreased from approximately 19,381 KiB to 413 KiB (uncompressed manifest sizes) by caching the subject model and WebAssembly runtime on first use. Subject removal requires a network connection on its first use; subsequent offline use was tested after caching. Bump the model cache version if the fixed-name model changes.
+- Animation previews are capped at approximately 30 updates per second. Test playback and exports on slower devices before treating this as a performance guarantee.
+- Verification: lint, typecheck, 26 unit tests, build, 29 browser tests, and 3 production-preview CSP/offline tests passed. Test results do not prove the site cannot be copied or attacked.
+
 ## Converter refinement — 2026-11-11
 
 - Homepage presents ASCII as the same kind of card and dedicated route as the seven other converters. ASCII state stays mounted when navigating away.
