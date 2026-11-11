@@ -26,3 +26,5 @@ main{max-width:1600px}.intro{position:relative;display:grid;grid-template-column
 @media(max-width:700px){.hero-mode{bottom:6%;left:5%}.hero-art-overlay .hero-coordinates{font-size:8px;right:5%;bottom:7%}.hero-scan{display:none}}
 @media(prefers-reduced-motion:reduce){.hero-scan{animation:none;display:none}}
 .hero-image{object-position:50% 35%}.hero-compare{position:absolute;z-index:3;left:6%;bottom:calc(7% + 54px);width:min(300px,75%);display:flex;align-items:center;gap:10px;padding:9px 10px;background:#080b0ddd;border:1px solid #afb7bd66;color:#e6eae5;font:9px monospace;letter-spacing:.5px}.hero-compare input{flex:1;min-width:40px;accent-color:#f0f2ec}.hero-compare output{min-width:28px;text-align:right}@media(max-width:700px){.hero-compare{left:5%;bottom:calc(6% + 54px)}}
+
+.feature-card canvas{filter:saturate(.8) brightness(.85)}.feature-card:hover canvas{filter:saturate(1) brightness(1)}

@@ -1,5 +1,10 @@
 # GLYPH Studio — Development Status
 
+## Feature card previews — 2026-11-11
+
+- All eight homepage feature cards now render the supplied portrait through their respective effects, sharing one cropped image for efficient loading. A generated fallback remains available if the image cannot load.
+- Verification: lint, production build, 26 unit tests, 3 homepage browser tests (including source-image changes), and 3 offline/security tests passed.
+
 ## Supplied homepage image — 2026-11-11
 
 - Replaced the earlier generated hero artwork with the user-supplied portrait, optimized for the PWA cache. Added a draggable Original/ASCII comparison alongside the existing live conversion and motion effects.

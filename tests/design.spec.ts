@@ -36,3 +36,13 @@ test('homepage switches between the original and real ASCII preview',async({page
   await controls.getByRole('button',{name:'Original'}).click();
   await expect(original).toBeVisible();
 });
+test('every feature preview is rendered from the homepage image',async({page})=>{
+  await page.goto('http://127.0.0.1:5173/');
+  const cards=page.locator('.feature-card canvas');
+  await expect.poll(()=>cards.evaluateAll(cs=>cs.every(c=>(c as HTMLCanvasElement).width!==300))).toBe(true);
+  const original=await cards.evaluateAll(cs=>cs.map(c=>(c as HTMLCanvasElement).toDataURL()));
+  expect(new Set(original).size).toBe(8);
+  await page.route('**/illustrations/portrait-preview.webp',route=>route.fulfill({path:'tests/fixtures/astronaut.png',contentType:'image/png'}));
+  await page.reload();
+  await expect.poll(async()=>cards.evaluateAll((cs,prior)=>cs.filter((c,i)=>(c as HTMLCanvasElement).width!==300&&(c as HTMLCanvasElement).toDataURL()!==prior[i]).length,original)).toBe(8);
+});
