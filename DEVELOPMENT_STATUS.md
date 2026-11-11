@@ -1,5 +1,10 @@
 # GLYPH Studio — Development Status
 
+## Cyber Japanese UI — 2026-11-11
+
+- Redesigned the homepage and editor surfaces with a monochrome cyber interface, Japanese typographic details, original geometric artwork, responsive converter cards, and preserved creator attribution. Existing image and export functionality remains in place.
+- Verification: lint, production build, 26 unit tests, and desktop/mobile navigation and overflow checks passed. Of 29 existing browser tests, 28 passed on the first run; the pink-phosphor WebM decode failed once and passed on a targeted retry. Investigate if intermittent decode failures recur.
+
 ## Attribution — 2026-11-11
 
 - Added creator attribution and a 2026 copyright notice for Muhammad Qaid Uqail (@qaid-u) to the website footer, README, and proprietary rights draft. Third-party licenses remain applicable; the rights draft remains subject to owner review.
