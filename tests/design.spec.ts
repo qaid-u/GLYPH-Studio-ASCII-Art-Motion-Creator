@@ -104,3 +104,16 @@ test('mobile editor shortcuts navigate and export the selected artwork',async({p
   await expect.poll(()=>page.locator('#ascii-style').evaluate(e=>Math.abs(e.getBoundingClientRect().top))).toBeLessThan(30);
   await expect(asciiBar.getByRole('button',{name:'Download PNG'})).toBeEnabled();
 });
+test('small control groups stay visible while larger groups remain collapsed',async({page})=>{
+  for(const width of [390,1200]){
+    await page.setViewportSize({width,height:850});await page.goto('http://127.0.0.1:5173/#/converter/one-bit');
+    await expect(page.getByLabel('Rotate image')).toBeVisible();await expect(page.getByLabel('Flip horizontally')).toBeVisible();
+    expect(await page.getByLabel('Rotate image').evaluate(e=>!!e.closest('details'))).toBe(false);
+    await expect(page.locator('.converter-details')).not.toHaveAttribute('open','');
+    await page.goto('http://127.0.0.1:5173/#/converter/ascii');await page.reload();await page.getByRole('button',{name:'Try demo'}).click();
+    await expect(page.getByLabel('Custom character ramp')).toBeVisible();await expect(page.getByLabel('Aspect ratio')).toBeVisible();await expect(page.getByRole('combobox',{name:'Fit',exact:true})).toBeVisible();
+    expect(await page.getByLabel('Custom character ramp').evaluate(e=>!!e.closest('details'))).toBe(false);
+    expect(await page.getByLabel('Aspect ratio').evaluate(e=>!!e.closest('details'))).toBe(false);
+    await expect(page.getByText('Detailed image settings')).toBeVisible();await expect(page.locator('#gamma')).not.toBeVisible();
+  }
+});

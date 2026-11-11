@@ -1,5 +1,10 @@
 # GLYPH Studio — Development Status
 
+## Control visibility — 2026-11-11
+
+- Removed collapsible wrappers around the two image-transform controls, the two ASCII framing controls, and the single custom-character input. Larger editing groups remain collapsible.
+- Verification: lint, build, 28 unit tests, 22 targeted browser tests, and 5 offline/security tests passed. Visibility was checked at mobile and desktop viewport sizes.
+
 ## Converter editing controls — 2026-11-11
 
 - Added image rotation and horizontal flip to all seven converters, including masked images, PNG, and animated WebM. Show original still displays the untouched image.
