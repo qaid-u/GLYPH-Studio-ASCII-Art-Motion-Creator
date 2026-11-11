@@ -12,10 +12,9 @@ GLYPH Studio is a local-first creative editor for converting an image into chara
 - **Isolate and refine:** Remove a background with an on-device subject-detection model or a simple edge-color method. Use the keep and erase brushes to refine a detected subject.
 - **Animate:** Preview wave, glitch, matrix rain, dissolve, pulse, and ripple effects with playback, loop, and timeline controls.
 - **Export:** Download PNG, TXT, animated GIF, or WebM. PNG supports transparency; GIF is limited to 640 px on its longest edge, and WebM availability depends on browser support.
-- **Return to your work:** Save, reopen, rename, duplicate, and delete projects stored in the browser on your device.
 - **Work offline:** Install the app where supported. After the initial files and model are cached, the application shell can load without a network connection.
 
-Images are processed on the device and are not uploaded by the app. Projects live in browser storage; clearing that storage can delete them.
+Images are processed on the device and are not uploaded by the app. Project-saving controls have been removed; existing browser project data is not deleted.
 
 ## Quick start
 
@@ -51,7 +50,7 @@ Image → sample pixels → map luminance to characters → animate a frame → 
   └── optional local subject mask ────────────────────────┘
 ```
 
-The editor uses React, TypeScript, Vite, and Canvas 2D. Subject detection runs in a Web Worker with ONNX Runtime Web and bundled U²-Net weights. IndexedDB stores projects locally; a service worker caches the app shell and model for offline use.
+The editor uses React, TypeScript, Vite, and Canvas 2D. Subject detection runs in a Web Worker with ONNX Runtime Web and bundled U²-Net weights. A service worker caches the app shell and model for offline use.
 
 ## Status and limitations
 
@@ -70,4 +69,4 @@ GLYPH Studio is a working name; no trademark registration or clearance is claime
 
 ## Independent image converters
 
-The **New Features** section also provides first versions of seven direct image converters: One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking. Each has a separate workspace, presets, PNG export, and local project saving. Animated tools can export WebM where supported. Datamosh is simulated, and Blob Tracking visualizes regions in a still image rather than tracking real motion. See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for the remaining advanced controls and export limitations.
+The **New Features** section also provides first versions of seven direct image converters: One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking. Each has a separate workspace, presets, collapsible detailed controls, and PNG export. Animated tools can export WebM where supported. Datamosh is simulated, and Blob Tracking visualizes regions in a still image rather than tracking real motion. See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for the remaining advanced controls and export limitations.

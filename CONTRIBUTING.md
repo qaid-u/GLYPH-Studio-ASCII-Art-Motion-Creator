@@ -21,7 +21,7 @@ The browser suites use local servers and Edge by default. Set `GLYPH_BROWSER_CHA
 - `src/engine.ts`, `src/animation.ts`, and `src/edge.ts`: character conversion, rendering, and effects.
 - `src/segmentation*`, `src/background.ts`, and `src/MaskEditor.tsx`: local background removal and mask refinement.
 - `src/export.ts`: GIF and WebM export; PNG and TXT actions are wired through the editor.
-- `src/projects.ts`: IndexedDB project persistence.
+- `src/projects.ts`: retained legacy IndexedDB helpers; the current interface does not save or delete projects.
 - `src/main.tsx` and `src/style.css`: editor interface and controls.
 - `public/models/`: bundled subject-detection model. See the third-party notices before replacing or redistributing it.
 - `tests/`: browser workflow and offline tests; unit tests sit beside the engine modules.

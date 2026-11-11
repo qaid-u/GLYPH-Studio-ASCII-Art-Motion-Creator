@@ -1,5 +1,15 @@
 # GLYPH Studio — Development Status
 
+## Latest update — 2026-11-11
+
+- Removed local project-saving, autosave, and project-list controls from the ASCII editor and all converter workspaces. Existing IndexedDB records are deliberately left untouched; they are not currently accessible through the interface.
+- Detailed ASCII and converter controls are collapsed by default. PNG exports from the seven image converters now render from the source at up to 2048 px on the longest edge and four megapixels; one-bit detail can be increased to 1200 samples across, and receipts render at 1200 px paper width while preserving the image aspect ratio. Blob analysis now fits within a 320 × 320 grid, including extreme portrait images.
+- Verification: typecheck, basic lint, production build, 23 unit tests, 20 Edge browser tests, and the offline suite passed. Browser checks cover collapsible controls, 1600 × 1200 PNG export, existing-data preservation, all converters and previous ASCII flows.
+- Remaining limitations: converter effects cannot preserve detail beyond source data or the export limits. The model-based background remover remains approximate; masks use a 320 × 320 model grid. Video preview/export remains bounded and browser-dependent. Advanced converter options and broader device/accessibility testing remain outstanding.
+
+## Prior development history
+
+
 Updated: 2026-11-11  
 Repository state: Working prototype; further device testing needed.
 
