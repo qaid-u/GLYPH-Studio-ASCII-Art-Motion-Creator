@@ -83,3 +83,24 @@ test('cockpit theme supports keyboard focus and reduced motion',async({page})=>{
   await expect(card).toHaveCSS('box-shadow',/rgb\(56, 189, 248\)/);
   await expect(page.locator('.hero-scan')).toBeHidden();
 });
+test('mobile editor shortcuts navigate and export the selected artwork',async({page})=>{
+  await page.setViewportSize({width:320,height:700});
+  await page.goto('http://127.0.0.1:5173/#/converter/one-bit');
+  const bar=page.getByRole('navigation',{name:'Mobile editor shortcuts'});
+  await expect(bar).toBeVisible();
+  await expect(bar.getByRole('button',{name:'Download PNG'})).toBeDisabled();
+  await bar.getByRole('button',{name:'Go to image settings'}).click();
+  await page.locator('.converter-page input[type=file]').setInputFiles('tests/fixtures/astronaut.png');
+  await expect(page.getByLabel('Converted image preview')).toBeVisible();
+  await bar.getByRole('button',{name:'Go to adjustments'}).click();
+  await expect.poll(()=>page.locator('#tool-adjust').evaluate(e=>e.getBoundingClientRect().top)).toBeLessThan(500);
+  const [download]=await Promise.all([page.waitForEvent('download'),bar.getByRole('button',{name:'Download PNG'}).click()]);
+  expect(download.suggestedFilename()).toMatch(/\.png$/);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.goto('http://127.0.0.1:5173/#/converter/ascii');
+  await page.getByRole('button',{name:'Try demo'}).click();
+  const asciiBar=page.getByRole('navigation',{name:'Mobile editor shortcuts'});
+  await asciiBar.getByRole('button',{name:'Go to adjustments'}).click();
+  await expect.poll(()=>page.locator('#ascii-style').evaluate(e=>Math.abs(e.getBoundingClientRect().top))).toBeLessThan(30);
+  await expect(asciiBar.getByRole('button',{name:'Download PNG'})).toBeEnabled();
+});

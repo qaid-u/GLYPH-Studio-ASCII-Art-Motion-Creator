@@ -1,5 +1,11 @@
 # GLYPH Studio — Development Status
 
+## Mobile editor — 2026-11-11
+
+- Added a mobile shortcut bar for preview, image settings, adjustments, and PNG export in both editors; improved touch targets, input sizing, safe-area spacing, and zoomed canvas scrolling.
+- Verification: lint, build, 26 unit tests, 36 browser tests, and 4 offline/security tests passed. Mobile navigation and PNG export were tested at 320 px, and the converter was visually inspected at 375 px. Physical-device testing remains outstanding.
+- Vercel firewall check: identified AI bots are denied; general Bot Protection is in log mode. Browser-delivered code and public assets cannot be made impossible to inspect or copy.
+
 ## Cyber Anime style kit — 2026-11-11
 
 - Applied the violet cockpit theme, hexagonal grid, chamfered panels, teal/blue highlights, layered glows, and reduced-motion-aware interactions to the homepage and editors. Updated PWA theme colors without changing artwork or export settings.
