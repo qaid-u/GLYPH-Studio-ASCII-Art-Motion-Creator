@@ -2,7 +2,7 @@
 
 ## Attribution — 2026-11-11
 
-- Added creator attribution and a 2026 copyright notice for Muhammad Qaid Uqail (@qaid-u) to the README and proprietary rights draft. Third-party licenses remain applicable; the rights draft remains subject to owner review.
+- Added creator attribution and a 2026 copyright notice for Muhammad Qaid Uqail (@qaid-u) to the website footer, README, and proprietary rights draft. Third-party licenses remain applicable; the rights draft remains subject to owner review.
 
 ## Security and performance — 2026-11-11
 
