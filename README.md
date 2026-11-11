@@ -1,28 +1,37 @@
 # GLYPH Studio
 
-**Turn images into animated ASCII art, entirely in your browser.**
+**Turn images into ASCII art, visual effects, and animations in your browser.**
 
-Created and produced by [Muhammad Qaid Uqail (@qaid-u)](https://github.com/qaid-u).
+[Open GLYPH Studio](https://glyph-studio-vercel.vercel.app/) · [Development status](DEVELOPMENT_STATUS.md) · [Security and performance](docs/security-and-performance.md)
 
-Copyright © 2026 Muhammad Qaid Uqail. All rights reserved. See the [proprietary rights notice](license.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+Created and produced by [Muhammad Qaid Uqail (@qaid-u)](https://github.com/qaid-u). GLYPH Studio is a working name; no trademark registration or clearance is claimed.
 
-GLYPH Studio is a local-first creative editor for converting an image into character art, refining its appearance, adding motion, and exporting the result. It is a working prototype under active development.
+![GLYPH Studio homepage with its cyber-themed editor and converter previews](docs/studio-preview-cyber.webp)
 
-![GLYPH Studio homepage showing its image converter tools](docs/studio-preview.png)
+GLYPH Studio is a local-first creative application under active development. Choose an image, compare effects, adjust the result, and export your artwork. The app runs in the browser without an account or a backend.
 
-## What you can do
+## Features
 
-- **Create:** Upload a PNG, JPEG, or WebP image, paste one from the clipboard, or try the built-in demo. Adjust framing, character density, color, contrast, and other image settings.
-- **Isolate and refine:** Remove a background with an on-device subject-detection model or a simple edge-color method. Use the keep and erase brushes to refine a detected subject.
-- **Animate:** Preview wave, glitch, matrix rain, dissolve, pulse, and ripple effects with playback, loop, and timeline controls.
-- **Export:** Download PNG, TXT, animated GIF, or WebM. PNG supports transparency; GIF is limited to 640 px on its longest edge, and WebM availability depends on browser support.
-- **Work offline:** Install the app where supported. After the application shell is cached, it can load without a network connection. Use subject removal once online to cache its model and runtime for later offline use.
+- **ASCII studio:** Convert PNG, JPEG, and WebP images into character art. Adjust the character style, colors, framing, and image settings.
+- **Motion:** Preview wave, glitch, matrix rain, dissolve, pulse, and ripple animations with playback and timeline controls.
+- **Image effects:** Explore One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking. Each converter has presets, optional detailed controls, and PNG export. Animated converters can also export WebM in supported browsers.
+- **Background removal:** The ASCII studio supports on-device subject detection, simple edge-color removal, and mask refinement. Expanding background removal to the other converters is in development and has not yet completed browser verification.
+- **Exports:** The ASCII studio supports PNG, TXT, animated GIF, and WebM. GIF output is limited to 640 pixels on its longest edge; WebM support varies by browser.
+- **Mobile and offline:** Use the mobile editor shortcuts and install the PWA where supported. After the app shell is cached, core features can work offline. Run subject detection once online to cache its model and runtime for subsequent offline use.
 
-Images are processed on the device and are not uploaded by the app. Project-saving controls have been removed; existing browser project data is not deleted.
+Datamosh is a simulated visual effect. Blob Tracking detects regions in a still image rather than tracking real-world motion. See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for tested behavior and current work.
 
-## Quick start
+## Get started
 
-**Requirements:** Node.js 24 and npm. Browser tests use an installed Microsoft Edge by default.
+1. Open the [live app](https://glyph-studio-vercel.vercel.app/).
+2. Drop or choose an image on the homepage to preview the effects, or open ASCII and choose **Try demo**.
+3. Pick a converter, adjust its settings, and download the result.
+
+Your image is processed on your device; the app does not upload it to a server. Project-saving controls are not currently available. Any project data from earlier versions remains in the browser until you remove it.
+
+## Run locally
+
+Requirements: **Node.js 24**, npm, and an installed Microsoft Edge browser for the default browser tests.
 
 ```bash
 git clone https://github.com/qaid-u/GLYPH-Studio-ASCII-Art-Motion-Creator.git
@@ -31,50 +40,42 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite. Choose a converter card, then use **Try demo** in ASCII or upload an image in any converter. The [private deployed app](https://glyph-studio-ascii.docilelinen.chatgpt.site) is available to its authorized owner.
+Open the local address printed by Vite. The repository is private, so cloning requires access.
 
-## Development commands
+## Development checks
 
 | Command | Purpose |
 | --- | --- |
-| `npm run dev` | Start the local development server |
+| `npm run dev` | Start the development server |
+| `npm run lint` | Lint application and browser-test code |
 | `npm run typecheck` | Check TypeScript types |
 | `npm test` | Run engine unit tests |
-| `npm run build` | Type-check and create the production build in `dist/` |
-| `npm run preview` | Serve the production build locally |
-| `npm run test:browser` | Run the editor and export tests in Edge |
-| `npm run test:offline` | Test the built app's offline shell and cached model; run `npm run build` first |
+| `node --test tests/firewall-monitor.test.mjs` | Test the optional firewall-monitor logic |
+| `npm run build` | Type-check and create a production build in `dist/` |
+| `npm run test:browser` | Run browser interaction and export tests |
+| `npm run test:offline` | Test the built PWA's offline and security behavior; run the build first |
 
-Set `GLYPH_BROWSER_CHANNEL` to another installed Playwright browser channel when appropriate. The browser tests start local servers and require permission to launch the browser and connect to those servers.
+Set `GLYPH_BROWSER_CHANNEL` to use another installed Playwright browser channel. Browser tests need permission to launch a browser and connect to a local server.
 
 ## How it works
 
-```text
-Image → sample pixels → map luminance to characters → animate a frame → preview / export
-  └── optional local subject mask ────────────────────────┘
-```
+The app uses React, TypeScript, Vite, and Canvas 2D. ASCII conversion samples image pixels, maps luminance to characters, and renders a grid. Procedural effects use the same render path for previews and supported exports. Subject detection runs locally in a Web Worker using ONNX Runtime Web and bundled U²-Net weights.
 
-The editor uses React, TypeScript, Vite, and Canvas 2D. Subject detection runs in a Web Worker with ONNX Runtime Web and bundled U²-Net weights. A service worker caches the app shell and model for offline use.
+The service worker caches the application shell. The subject-detection model and WebAssembly runtime are cached after their first use; the first use requires a connection. No user image is sent to the server by the application.
 
-## Status and limitations
+## Limitations and security
 
-GLYPH Studio is **not yet a production-ready release**. Background removal is probabilistic, and mask brushes currently require pointer or touch input. GIF and WebM exports have browser and performance constraints. Installation, offline inference, accessibility, and export behavior need broader testing across devices and browsers. The offline test verifies the cached shell and model fetch, not the complete installed-app lifecycle.
+GLYPH Studio is a **working prototype**, not a finished production release. Subject detection is probabilistic, and mask refinement requires pointer or touch input. Mobile behavior, accessibility, offline installation, and exports need broader testing across devices and browsers.
 
-See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for verified checks and current priorities, and [development.md](development.md) for the longer product blueprint.
+The deployed app uses security headers and Vercel firewall protections. Browser-delivered code and public assets can still be inspected or copied. Optional Telegram firewall notifications require separate setup and are **disabled until configured and tested**. See [Security and performance](docs/security-and-performance.md) for the alert scope and setup instructions.
 
-## Project information
+## Project documentation
 
-- [Development guide](CONTRIBUTING.md) — setup, tests, and expectations for authorized collaborators
-- [Security policy](SECURITY.md) — reporting a suspected security issue
+- [Development status](DEVELOPMENT_STATUS.md) — completed work, verification, and next steps
+- [Contributing guide](CONTRIBUTING.md) — setup and expectations for authorized collaborators
+- [Security policy](SECURITY.md) — how to report a suspected issue
 - [Third-party notices](THIRD_PARTY_NOTICES.md) — dependency and model attribution
-- [License draft](license.md) — proprietary rights notice awaiting owner review
+- [Product blueprint](development.md) — longer-term development notes
+- [Proprietary rights notice](license.md) — draft for owner review
 
-GLYPH Studio is a working name; no trademark registration or clearance is claimed.
-
-## Independent image converters
-
-The **New Features** section also provides first versions of seven direct image converters: One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking. Each has a separate workspace, presets, collapsible detailed controls, and PNG export. Animated tools can export WebM where supported. Datamosh is simulated, and Blob Tracking visualizes regions in a still image rather than tracking real motion. See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for the remaining advanced controls and export limitations.
-
-Converter controls include configurable dithering patterns, datamosh direction and frequency, bright/dark/color blob detection, flashlight motion paths, receipt texture, CRT interference, and phosphor glow. The controls are in each tool’s detailed settings.
-
-For deployment security, traffic settings, caching, and operational limitations, see [Security and performance](docs/security-and-performance.md).
+Copyright © 2026 Muhammad Qaid Uqail. All rights reserved. Third-party components remain subject to their respective licenses.
