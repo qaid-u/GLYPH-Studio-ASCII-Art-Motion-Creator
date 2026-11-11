@@ -1,6 +1,7 @@
+DRAFT — FOR OWNER REVIEW
 
 GLYPH Studio
-Copyright (c) 2026 [Legal Name or Company Name]
+Copyright (c) 2026 Muhammad Qaid Uqail (@qaid-u)
 All Rights Reserved.
 
 PROPRIETARY SOFTWARE

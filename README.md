@@ -2,6 +2,10 @@
 
 **Turn images into animated ASCII art, entirely in your browser.**
 
+Created and produced by [Muhammad Qaid Uqail (@qaid-u)](https://github.com/qaid-u).
+
+Copyright © 2026 Muhammad Qaid Uqail. All rights reserved. See the [proprietary rights notice](license.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+
 GLYPH Studio is a local-first creative editor for converting an image into character art, refining its appearance, adding motion, and exporting the result. It is a working prototype under active development.
 
 ![GLYPH Studio homepage showing its image converter tools](docs/studio-preview.png)

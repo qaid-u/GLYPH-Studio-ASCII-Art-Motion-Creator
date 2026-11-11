@@ -1,5 +1,9 @@
 # GLYPH Studio — Development Status
 
+## Attribution — 2026-11-11
+
+- Added creator attribution and a 2026 copyright notice for Muhammad Qaid Uqail (@qaid-u) to the README and proprietary rights draft. Third-party licenses remain applicable; the rights draft remains subject to owner review.
+
 ## Security and performance — 2026-11-11
 
 - Added Vercel security headers, including a same-origin Content Security Policy, frame restrictions, MIME sniffing protection, and a restrictive permissions policy. Hashed assets have immutable cache headers; the fixed-name model has a shorter cache lifetime. The public client and its model remain downloadable by design.
