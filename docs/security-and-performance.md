@@ -17,3 +17,11 @@ If `public/models/u2netp.onnx` is replaced, increment the `glyph-subject-model-v
 ## Monitoring
 
 Use the Vercel project dashboard's Firewall and usage views to review allowed, logged, and denied requests and bandwidth. Current rule settings can be inspected with `vercel firewall status` from a linked project. Avoid blanket rate limits that could disrupt real users or model downloads; tune rules only after reviewing actual traffic and plan limits.
+
+## Firewall alert notifications
+
+Vercel displays detected firewall attack alerts in the project Firewall dashboard. Its documented DDoS attack alert threshold is more than 100,000 malicious requests in ten minutes; this is not a detector for every suspicious request. Check the linked deployment with `vercel firewall alerts list --since 24h --json`. Logged or blocked requests alone do not prove an attack.
+
+A Codex hourly check has been created for this project and reports newly detected Vercel firewall alerts in the associated chat. It requires the local Codex environment and Vercel access; it is not a continuously available security service and does not send email. The existing Vercel firewall configuration has not been changed.
+
+Gmail email delivery is not configured. A Gmail connection and a verified delivery workflow are required before claiming email notifications are active. Vercel documents its firewall attack event delivery through webhooks or Slack; its anomaly alert email feature requires a qualifying paid plan. See [Firewall Observability](https://vercel.com/docs/vercel-firewall/firewall-observability) and [Alerts](https://vercel.com/docs/alerts).

@@ -1,5 +1,11 @@
 # GLYPH Studio — Development Status
 
+## Firewall alert monitoring — 2026-11-11
+
+- Created an hourly Codex chat check for newly detected Vercel firewall alerts; this depends on the local environment and Vercel access and does not send email. Vercel reported no active or resolved firewall alerts in the latest 24-hour check.
+- Gmail was requested but is not connected. Email alerts remain incomplete until the Gmail connection and an appropriate delivery workflow are configured and tested. Vercel firewall alerts do not identify every suspicious request.
+- Updated the security operations guide with the alert scope, verification command, and provider limitations.
+
 ## Mobile editor — 2026-11-11
 
 - Added a mobile shortcut bar for preview, image settings, adjustments, and PNG export in both editors; improved touch targets, input sizing, safe-area spacing, and zoomed canvas scrolling.
