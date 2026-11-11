@@ -67,3 +67,7 @@ See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for verified checks and curre
 - [License draft](license.md) — proprietary rights notice awaiting owner review
 
 GLYPH Studio is a working name; no trademark registration or clearance is claimed.
+
+## Independent image converters
+
+The **New Features** section also provides first versions of seven direct image converters: One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking. Each has a separate workspace, presets, PNG export, and local project saving. Animated tools can export WebM where supported. Datamosh is simulated, and Blob Tracking visualizes regions in a still image rather than tracking real motion. See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for the remaining advanced controls and export limitations.

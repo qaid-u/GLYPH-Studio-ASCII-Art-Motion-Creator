@@ -1,0 +1,4 @@
+import {describe,expect,it} from 'vitest';
+import {dither} from './dither';
+const input=new Uint8ClampedArray(Array.from({length:64},(_,i)=>[i*4,i*4,i*4,255]).flat());
+describe('one-bit converter',()=>{for(const algorithm of ['threshold','floyd','bayer','atkinson'] as const)it(`${algorithm} produces only the requested two colors`,()=>{const output=dither(input,8,8,algorithm,128,0,1,false,[1,2,3],[245,246,247]);const colors=new Set<string>();for(let i=0;i<output.length;i+=4)colors.add(`${output[i]},${output[i+1]},${output[i+2]},${output[i+3]}`);expect([...colors].sort()).toEqual(['1,2,3,255','245,246,247,255'])});it('inverts the mapping',()=>{const original=dither(input,8,8,'threshold',128,0,1,false,[0,0,0],[255,255,255]),inverted=dither(input,8,8,'threshold',128,0,1,true,[0,0,0],[255,255,255]);expect(original[0]).toBe(0);expect(inverted[0]).toBe(255)})});

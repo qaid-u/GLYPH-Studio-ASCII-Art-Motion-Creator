@@ -28,3 +28,16 @@ Repository state: Working prototype; further device testing needed.
 1. Resolve development dependency advisories and broaden device/accessibility testing.
 2. Add keyboard-friendly mask correction, stronger before/after comparison, and clearer beginner/advanced modes.
 3. Add local project backup/import and test offline model inference and installation on mobile.
+
+## Independent image converters — 2026-11-11
+
+- Added a New Features directory and independent routed workspaces for One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking. Each accepts a local image, has working presets and adjustable controls, live/original views, reset, PNG export, and locally saved projects. The ASCII editor and its existing projects remain available.
+- Pink Phosphor, CRT, Flash Light, Datamosh, and Blob Tracking support timeline playback and WebM recording; One Bit and Receipt are static. One Bit supports threshold, Floyd–Steinberg, Bayer, and Atkinson and exports exactly two selected colors. Datamosh is simulated; blob graphics show bright-region detection on a still image, not real motion tracking.
+- Converter projects use the existing IndexedDB store with a converter-type discriminator; legacy ASCII projects without that discriminator continue to be listed in the ASCII editor. Converter projects are listed in their corresponding workspace.
+- Verification: `npm run lint` (basic correctness rules), `npm run typecheck`, `npm test` (23 tests), `npm run build`, `npm run test:browser` (19 Edge tests), and `npm run test:offline` passed. Browser tests verify each tool's PNG, presets and project reopening, two-color output, five changing WebM files, legacy project separation, mobile overflow, and existing ASCII workflows. Offline check loads all seven tools with an image after caching. Production dependency audit reports zero vulnerabilities; npm reported 10 development dependency advisories (2 low, 8 moderate).
+
+### Remaining work for the full converter brief
+
+- These are functional first versions, not the complete specification. Expand converter-specific settings: datamosh direction/frequency/channel separation; blob dark/color detection, labels/connections and maximum regions; flashlight motion paths/flicker and numeric positioning; receipt dimensions, placement, texture and edge options; CRT channel separation/noise/flicker; and phosphor hue/saturation/persistence controls.
+- The shared workspace offers explicit save/reopen/delete but not converter autosave, rename/duplicate, or a unified project browser. Converter exports cap the longest edge at 960 px (receipt is 480 px wide); no GIF/MP4 export is offered by the new tools. WebM records in real time and is browser-dependent.
+- Expand feature-specific quality/performance tests, mobile/touch interaction and cancellation checks; add accessible keyboard alternatives for interactive light positioning. Add more export configuration, fully customizable receipt layout, and richer before/after comparison. Test app install/update and actual offline exports across devices.

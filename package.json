@@ -10,7 +10,8 @@
     "test": "vitest run src",
     "test:browser": "playwright test",
     "test:offline": "playwright test -c playwright.pwa.config.ts",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src tests"
   },
   "dependencies": {
     "gifenc": "^1.0.3",
@@ -22,7 +23,9 @@
     "@playwright/test": "^1.65.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
+    "@typescript-eslint/parser": "^8.72.2",
     "@vitejs/plugin-react": "^4.5.0",
+    "eslint": "^10.14.0",
     "gifuct-js": "^2.1.2",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
