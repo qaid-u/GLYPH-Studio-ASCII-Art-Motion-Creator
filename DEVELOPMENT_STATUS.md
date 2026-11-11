@@ -1,5 +1,12 @@
 # GLYPH Studio — Development Status
 
+## Converter refinement — 2026-11-11
+
+- Homepage presents ASCII as the same kind of card and dedicated route as the seven other converters. ASCII state stays mounted when navigating away.
+- Added adjustable dithering strength/phase; datamosh axis, rate and channel separation; blob bright/dark/color detection, label/connection toggles and region count; flashlight paths, position and flicker; receipt paper width, texture and torn edge; CRT channel separation, vignette, noise and flicker; and phosphor bloom radius, ghosting and pulse.
+- Verification: basic lint, TypeScript, build, 26 unit tests, 28 Edge browser tests and offline check passed. Seven browser tests verify that representative detailed controls change the rendered image; no claim of exclusivity versus other products.
+- Remaining limitations: effects are procedural and not a complete implementation of every earlier requested parameter. CRT channel processing and model processing can be expensive on slower devices; broader browser, mobile and accessibility testing is needed. Vercel deployment outcome is reported separately from source checks.
+
 ## Latest update — 2026-11-11
 
 - Removed local project-saving, autosave, and project-list controls from the ASCII editor and all converter workspaces. Existing IndexedDB records are deliberately left untouched; they are not currently accessible through the interface.

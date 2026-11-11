@@ -4,7 +4,7 @@
 
 GLYPH Studio is a local-first creative editor for converting an image into character art, refining its appearance, adding motion, and exporting the result. It is a working prototype under active development.
 
-![GLYPH Studio editor showing the generated demo artwork](docs/studio-preview.png)
+![GLYPH Studio homepage showing its image converter tools](docs/studio-preview.png)
 
 ## What you can do
 
@@ -27,7 +27,7 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite. Use **Try demo** or choose an image to begin. The [private deployed app](https://glyph-studio-ascii.docilelinen.chatgpt.site) is available to its authorized owner.
+Open the local URL printed by Vite. Choose a converter card, then use **Try demo** in ASCII or upload an image in any converter. The [private deployed app](https://glyph-studio-ascii.docilelinen.chatgpt.site) is available to its authorized owner.
 
 ## Development commands
 
@@ -70,3 +70,5 @@ GLYPH Studio is a working name; no trademark registration or clearance is claime
 ## Independent image converters
 
 The **New Features** section also provides first versions of seven direct image converters: One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking. Each has a separate workspace, presets, collapsible detailed controls, and PNG export. Animated tools can export WebM where supported. Datamosh is simulated, and Blob Tracking visualizes regions in a still image rather than tracking real motion. See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for the remaining advanced controls and export limitations.
+
+Converter controls include configurable dithering patterns, datamosh direction and frequency, bright/dark/color blob detection, flashlight motion paths, receipt texture, CRT interference, and phosphor glow. The controls are in each tool’s detailed settings.
