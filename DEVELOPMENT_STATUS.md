@@ -1,5 +1,10 @@
 # GLYPH Studio — Development Status
 
+## Website and PWA icon — 2026-11-11
+
+- Replaced the app icons with an original GLYPH star design matching the cyber theme, and added SVG/PNG favicons, an Apple touch icon, and separate standard and maskable PWA icons.
+- Verification: lint, build, 27 unit tests, and 5 offline/security browser tests passed, including offline icon availability and pixel dimensions. Icon updates on already-installed apps depend on browser and operating-system caching.
+
 ## Repository documentation — 2026-11-11
 
 - Refreshed the README with the current Vercel link, screenshot, converter and export details, setup, privacy, security, and known limitations. The README now documents background removal across all converters and its export limitations.
