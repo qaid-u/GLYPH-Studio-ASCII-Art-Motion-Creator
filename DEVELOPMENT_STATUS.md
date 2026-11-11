@@ -1,5 +1,11 @@
 # GLYPH Studio — Development Status
 
+## Converter editing controls — 2026-11-11
+
+- Added image rotation and horizontal flip to all seven converters, including masked images, PNG, and animated WebM. Show original still displays the untouched image.
+- Expanded effect controls: seeded stochastic dithering; phosphor scanlines and ghost offset; CRT scanline and roll controls; flashlight beam width and color strength; receipt margins, print pattern, and alignment; datamosh block opacity; and blob box thickness, center, and scanline toggles. Detailed controls remain collapsible.
+- Verification: lint, build, 28 unit tests, 54 browser tests, and 5 offline/security tests passed. After a final horizontal-flip ordering fix, all 9 targeted customization tests and lint/unit/build checks passed again. Physical-device and broader browser coverage remain outstanding.
+
 ## Website and PWA icon — 2026-11-11
 
 - Replaced the app icons with an original GLYPH star design matching the cyber theme, and added SVG/PNG favicons, an Apple touch icon, and separate standard and maskable PWA icons.
