@@ -1,39 +1,69 @@
-# GLYPH Studio
+<div align="center">
 
-**Turn images into ASCII art, visual effects, and animations in your browser.**
+# ✳️ GLYPH Studio
 
-[Open GLYPH Studio](https://glyph-studio-vercel.vercel.app/) · [Development status](DEVELOPMENT_STATUS.md) · [Security and performance](docs/security-and-performance.md)
+**Turn images into ASCII art, visual effects, and animations, right in your browser.**
 
-Created and produced by [Muhammad Qaid Uqail (@qaid-u)](https://github.com/qaid-u). GLYPH Studio is a working name; no trademark registration or clearance is claimed.
+<a href="https://glyph-studio-vercel.vercel.app/"><img src="https://img.shields.io/badge/%F0%9F%9A%80%20LIVE%20DEMO-Open%20GLYPH%20Studio-7C3AED?style=for-the-badge&logoColor=white" alt="Live Demo" height="48"></a>
 
-![GLYPH Studio homepage with its cyber-themed editor and converter previews](docs/studio-preview-cyber.webp)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)
+![Canvas 2D](https://img.shields.io/badge/Canvas-2D-E34F26?logo=html5&logoColor=white)
+![ONNX Runtime Web](https://img.shields.io/badge/ONNX%20Runtime-Web-005CED?logo=onnx&logoColor=white)
+![PWA](https://img.shields.io/badge/PWA-offline--ready-5A0FC8?logo=pwa&logoColor=white)
+![Playwright](https://img.shields.io/badge/Tested%20with-Vitest%20%2B%20Playwright-45BA4B?logo=playwright&logoColor=white)
+![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?logo=vercel&logoColor=white)
 
-GLYPH Studio is a local-first creative application under active development. Choose an image, compare effects, adjust the result, and export your artwork. The app runs in the browser without an account or a backend.
+[Development status](DEVELOPMENT_STATUS.md) · [Security and performance](docs/security-and-performance.md) · [Contributing](CONTRIBUTING.md) · [Security policy](SECURITY.md)
 
-## Features
+</div>
 
-- **ASCII studio:** Convert PNG, JPEG, and WebP images into character art. Adjust the character style, colors, framing, and image settings.
-- **Motion:** Preview wave, glitch, matrix rain, dissolve, pulse, and ripple animations with playback and timeline controls.
-- **Image effects:** Explore One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking. Each converter has presets, optional detailed controls, image rotation and horizontal flip, and PNG export. Animated converters can also export WebM in supported browsers.
-- **Background removal:** All converters support on-device subject detection, simple edge-color removal, and mask refinement. PNG exports retain transparency; the receipt converter keeps its paper background, and WebM uses a dark backdrop.
-- **Exports:** The ASCII studio supports PNG, TXT, animated GIF, and WebM. GIF output is limited to 640 pixels on its longest edge; WebM support varies by browser.
-- **Mobile and offline:** Use the mobile editor shortcuts and install the PWA where supported. After the app shell is cached, core features can work offline. Run subject detection once online to cache its model and runtime for subsequent offline use.
+---
 
-The detailed controls include stochastic dithering, phosphor ghosting and scanlines, CRT screen roll, flashlight beam shape, receipt paper and print settings, datamosh block opacity, and blob overlay options. Find these controls directly in the converter’s adjustment panel; **Reset edits** restores its defaults without removing the image.
+## 🎬 Demo
 
-Datamosh is a simulated visual effect. Blob Tracking detects regions in a still image rather than tracking real-world motion. See [DEVELOPMENT_STATUS.md](DEVELOPMENT_STATUS.md) for tested behavior and current work.
+Try it live: **[glyph-studio-vercel.vercel.app](https://glyph-studio-vercel.vercel.app/)**. Drop an image on the homepage to preview every effect, or open ASCII and choose **Try demo**.
 
-## Get started
+<p align="center">
+  <img src="docs/studio-preview-cyber.webp" alt="GLYPH Studio homepage with the cyber theme: hero, drop zone and eight converter cards" width="100%">
+</p>
 
-1. Open the [live app](https://glyph-studio-vercel.vercel.app/).
-2. Drop or choose an image on the homepage to preview the effects, or open ASCII and choose **Try demo**.
-3. Pick a converter, adjust its settings, and download the result.
+<p align="center">
+  <img src="docs/studio-preview.png" alt="GLYPH Studio homepage showing the eight image converters with live previews" width="100%">
+</p>
 
-Your image is processed on your device; the app does not upload it to a server. Project-saving controls are not currently available. Any project data from earlier versions remains in the browser until you remove it.
+> GLYPH Studio is a local-first creative app under active development. Created and produced by [Muhammad Qaid Uqail (@qaid-u)](https://github.com/qaid-u). The name is a working name; no trademark registration or clearance is claimed.
 
-## Run locally
+## ✨ Features
 
-Requirements: **Node.js 24**, npm, and an installed Microsoft Edge browser for the default browser tests.
+- **ASCII studio:** convert PNG, JPEG, and WebP images into character art; adjust character style, colors, framing, and image settings.
+- **Motion:** preview wave, glitch, matrix rain, dissolve, pulse, and ripple animations with playback and timeline controls.
+- **Image effects:** One Bit Dither, Pink Phosphor, CRT, Flash Light, Receipt Ticket, Datamosh, and Blob Tracking, each with presets, optional detailed controls, rotation, horizontal flip, and PNG export. Animated converters can also export WebM in supported browsers.
+- **Background removal:** on-device subject detection, simple edge-color removal, and mask refinement for all converters. PNG exports keep transparency; the receipt converter keeps its paper background; WebM uses a dark backdrop.
+- **Exports:** the ASCII studio supports PNG, TXT, animated GIF (max 640 px on the longest edge), and WebM (browser-dependent).
+- **Private by design:** images are processed on your device and never uploaded; no account or backend required.
+- **Mobile and offline:** mobile editor shortcuts and an installable PWA. After the app shell is cached, core features work offline; run subject detection once online to cache its model and runtime.
+
+Detailed controls include stochastic dithering, phosphor ghosting and scanlines, CRT screen roll, flashlight beam shape, receipt paper and print settings, datamosh block opacity, and blob overlay options. **Reset edits** restores defaults without removing the image. Datamosh is a simulated effect, and Blob Tracking detects regions in a still image rather than tracking real-world motion.
+
+## 🧰 Tech stack
+
+| Area | Tools |
+| --- | --- |
+| UI | React 19, TypeScript, Vite |
+| Rendering | Canvas 2D (shared render path for previews and exports) |
+| Subject detection | ONNX Runtime Web in a Web Worker with bundled U²-Net weights |
+| Export | `gifenc` for GIF, MediaRecorder for WebM, canvas for PNG |
+| PWA | `vite-plugin-pwa` service worker |
+| Testing | Vitest, Playwright |
+| Hosting | Vercel (security headers and firewall protections) |
+
+ASCII conversion samples image pixels, maps luminance to characters, and renders a grid.
+
+## 🚀 Quick start
+
+Requirements: **Node.js 24**, npm, and an installed Microsoft Edge browser for the default browser tests. The repository is private, so cloning requires access.
 
 ```bash
 git clone https://github.com/qaid-u/GLYPH-Studio-ASCII-Art-Motion-Creator.git
@@ -42,9 +72,7 @@ npm ci
 npm run dev
 ```
 
-Open the local address printed by Vite. The repository is private, so cloning requires access.
-
-## Development checks
+Open the local address printed by Vite.
 
 | Command | Purpose |
 | --- | --- |
@@ -55,32 +83,34 @@ Open the local address printed by Vite. The repository is private, so cloning re
 | `node --test tests/firewall-monitor.test.mjs` | Test the optional firewall-monitor logic |
 | `npm run build` | Type-check and create a production build in `dist/` |
 | `npm run test:browser` | Run browser interaction and export tests |
-| `npm run test:offline` | Test the built PWA's offline and security behavior; run the build first |
+| `npm run test:offline` | Test the built PWA's offline and security behavior (build first) |
 
 Set `GLYPH_BROWSER_CHANNEL` to use another installed Playwright browser channel. Browser tests need permission to launch a browser and connect to a local server.
 
-## How it works
+## 🗂️ Project structure
 
-The app uses React, TypeScript, Vite, and Canvas 2D. ASCII conversion samples image pixels, maps luminance to characters, and renders a grid. Procedural effects use the same render path for previews and supported exports. Subject detection runs locally in a Web Worker using ONNX Runtime Web and bundled U²-Net weights.
+```
+src/        Application and engine code (with unit tests)
+public/     Static assets and illustrations
+tests/      Browser and offline/PWA tests
+scripts/    Build and support scripts
+docs/       Preview images, security and performance notes
+vercel.json Deployment headers and configuration
+```
 
-The service worker caches the application shell. The subject-detection model and WebAssembly runtime are cached after their first use; the first use requires a connection. No user image is sent to the server by the application.
+## 🔒 Limitations and security
 
-## Limitations and security
+GLYPH Studio is a **working prototype**, not a finished production release. Subject detection is probabilistic, and mask refinement requires pointer or touch input. Mobile behavior, accessibility, offline installation, and exports need broader testing across devices and browsers. Project-saving controls are not currently available; project data from earlier versions remains in the browser until removed.
 
-GLYPH Studio is a **working prototype**, not a finished production release. Subject detection is probabilistic, and mask refinement requires pointer or touch input. Mobile behavior, accessibility, offline installation, and exports need broader testing across devices and browsers.
+The service worker caches the app shell; the subject-detection model and WebAssembly runtime are cached after first use, which requires a connection. The deployed app uses security headers and Vercel firewall protections, but browser-delivered code and public assets can still be inspected or copied. Optional Telegram firewall notifications require separate setup and are **disabled until configured and tested**; see [Security and performance](docs/security-and-performance.md).
 
-The deployed app uses security headers and Vercel firewall protections. Browser-delivered code and public assets can still be inspected or copied. Optional Telegram firewall notifications require separate setup and are **disabled until configured and tested**. See [Security and performance](docs/security-and-performance.md) for the alert scope and setup instructions.
+## 📄 Documentation and license
 
-## Project documentation
-
-- [Development status](DEVELOPMENT_STATUS.md) — completed work, verification, and next steps
-- [Contributing guide](CONTRIBUTING.md) — setup and expectations for authorized collaborators
-- [Security policy](SECURITY.md) — how to report a suspected issue
-- [Third-party notices](THIRD_PARTY_NOTICES.md) — dependency and model attribution
-- [Product blueprint](development.md) — longer-term development notes
-- [Proprietary rights notice](license.md) — draft for owner review
-
-## Link Website
-https://glyph-studio-vercel.vercel.app/
+- [Development status](DEVELOPMENT_STATUS.md): completed work, verification, and next steps
+- [Contributing guide](CONTRIBUTING.md): setup and expectations for authorized collaborators
+- [Security policy](SECURITY.md): how to report a suspected issue
+- [Third-party notices](THIRD_PARTY_NOTICES.md): dependency and model attribution
+- [Product blueprint](development.md): longer-term development notes
+- [Proprietary rights notice](license.md): draft for owner review
 
 Copyright © 2026 Muhammad Qaid Uqail. All rights reserved. Third-party components remain subject to their respective licenses.
